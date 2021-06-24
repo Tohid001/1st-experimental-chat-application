@@ -2,6 +2,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const http = require("http");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const loginRouter = require("./Routers/loginRouter");
@@ -16,6 +17,7 @@ const {
 const ecorateHtmlResponse = require("./middlewares/decorateHtmlResponse");
 
 const app = express();
+const server = http.createServer(app);
 dotenv.config();
 
 //database connection
@@ -57,6 +59,6 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 //server initializing
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log(`app is listening to ${process.env.PORT}`);
 });
